@@ -1,0 +1,76 @@
+body::-webkit-scrollbar {
+    width: 0.5em;
+  }
+   
+body::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+   
+body::-webkit-scrollbar-thumb {
+    background-color: #4b4b4b;
+    outline: 3px solid rgb(21, 21, 21);
+  }
+.navshadow{
+  box-shadow:         0px 0px 16px 0px transparentize($color: #000000, $amount: 0.6);
+}
+
+.toolbar{
+  height: 60vh;
+  position: sticky; 
+  top: 3rem; 
+  z-index: 1;
+  @media (max-width: 1200px) {
+    height: auto; 
+    background-color: #dfe4ea;
+    margin-top: 0.5rem;
+  }
+}
+
+.toolbar-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  width: 100%;
+  @media (max-width: 1200px) {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .my-button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius:30px;
+    background-color:#3d3d3d;
+    padding: 0.5rem 0rem 0.5rem 0rem;
+    margin: 0.2rem 0rem 0.2rem 0rem;
+    width: 100%;
+    @media (max-width: 1200px) {
+      width: auto;
+      margin: 0rem;
+      
+    }
+  }
+  .button-text{
+    margin-right: 0.6rem;
+    color: transparentize($color: #ffffff, $amount: 0.1);
+    font-weight: 400;
+    @media (max-width: 1200px) {
+      display: none;
+      visibility: hidden;
+    }
+  }
+}
+
+
+
+$body-background-color :#dfe4ea;
+$footer-background-color:#ffffff00;
+$footer-padding: 0rem 0rem 2rem 0rem;
+$panel-block-hover-background-color:#c7ecee;
+$box-shadow:0 0.5em 1em -0.125em rgba(#000000, 0.16), 0 0px 0 1px rgba(#000000, 0.02);
+
+
+@import '../node_modules/bulma/bulma.sass'
