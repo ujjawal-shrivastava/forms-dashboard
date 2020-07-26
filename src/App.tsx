@@ -1,4 +1,4 @@
-import React, {lazy, Suspense} from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import './App.scss';
 import Navbar from './components/Navbar'
@@ -15,21 +15,34 @@ const NotFound = lazy(() => import('./pages/NotFound/NotFound'));
 
 
 function App() {
+  const [navHidden, setNavHidden] = useState(false)
+  var prevScrollpos = window.pageYOffset;
+  window.onscroll = () => {
+    var currentScrollPos = window.pageYOffset;
+    if (prevScrollpos > currentScrollPos) {
+      setNavHidden(false)
+    } else {
+      setNavHidden(true)
+    }
+    prevScrollpos = currentScrollPos;
+  }
   return (
     <BrowserRouter>
-    <Suspense fallback={<div>Loading...</div>}>
-    {(window.location.pathname==="/login"||window.location.pathname==="/register")?"":<Navbar/>}
-      <Switch> 
-        <Route path="/login" component={Login} exact />
-        <Route path="/register" component={Register} exact />
-        <Route path="/" component={Dashboard} exact />
-        <Route path="/forms" component={Forms} exact />
-        <Route path="/responses" component={Responses} exact />
-        <Route path="/settings" component={Settings} exact />
-        <Route path="/add" component={FormBuilder} exact />
-        <Route component={NotFound}/>
-      </Switch>
-      {(window.location.pathname==="/login"||window.location.pathname==="/register")?"":<Footer/>}
+      <Suspense fallback={<div>Loading...</div>}>
+        {(window.location.pathname === "/login" || window.location.pathname === "/register") ? "" : <Navbar hidden={navHidden}/>}
+        <Switch>
+          <Route path="/login" component={Login} exact />
+          <Route path="/register" component={Register} exact />
+          <Route path="/" component={Dashboard} exact />
+          <Route path="/forms" component={Forms} exact />
+          <Route path="/responses" component={Responses} exact />
+          <Route path="/settings" component={Settings} exact />
+          <Route path="/add" exact >
+            <FormBuilder navHidden={navHidden} />
+          </Route>
+          <Route component={NotFound} />
+        </Switch>
+        {(window.location.pathname === "/login" || window.location.pathname === "/register") ? "" : <Footer />}
       </Suspense>
     </BrowserRouter>
   );

@@ -12,17 +12,18 @@ body::-webkit-scrollbar-thumb {
   }
 .navshadow{
   box-shadow:         0px 0px 16px 0px transparentize($color: #000000, $amount: 0.6);
+  transition: top 0.4s;
 }
 
 .toolbar{
   height: 60vh;
-  position: sticky; 
-  top: 3rem; 
+  position: sticky;  
   z-index: 1;
   @media (max-width: 1200px) {
     height: auto; 
-    background-color: #dfe4ea;
+    //background-color: #dfe4ea;
     margin-top: 0.5rem;
+    transition: top ease 0.6s;
   }
 }
 
@@ -53,6 +54,18 @@ body::-webkit-scrollbar-thumb {
       
     }
   }
+
+  .my-button:hover{
+    background-color: #808e9b;
+    @media (max-width: 1200px) {
+      background-color:#3d3d3d;
+    }
+  }
+
+  .my-button:active{
+    background-color: #2ecc71;
+  }
+
   .button-text{
     margin-right: 0.6rem;
     color: transparentize($color: #ffffff, $amount: 0.1);
