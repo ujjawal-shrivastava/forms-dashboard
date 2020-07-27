@@ -7,7 +7,7 @@ import YourForms from './Components/YourForms';
 import Responses from './Components/Responses';
 
 export default function Dashboard() {
-    document.title = "Dashboard - DeForm™";
+    document.title = "Dashboard - DeForm";
     return (
         <section className="section">
             <div className="columns mb-5">

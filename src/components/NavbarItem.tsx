@@ -12,7 +12,7 @@ interface Props{
 export default function NavbarItem(props:Props) {
     //const [isActive, setIsActive]= useState(false)
     return (
-        <Link to={props.route} className={`navbar-item ${props.isActive?"is-active is-tab":""}`}
+        <Link to={props.route} className={`navbar-item nav-trans ${props.isActive?"is-active is-tab":""}`}
             onClick={
                 ()=>{
                     props.change(props.route)

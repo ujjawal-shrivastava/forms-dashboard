@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import NavbarItem from './NavbarItem';
-import { Link } from 'react-router-dom';
+import { Link, withRouter,Redirect} from 'react-router-dom';
 
-export default function Navbar(props: any) {
+function Navbar(props: any) {
   const [isActive, setIsActive] = useState(false);
   const [currentPage, setCurrentPage] = useState(window.location.pathname)
 
@@ -17,10 +17,10 @@ export default function Navbar(props: any) {
     <nav id="navbar" className="navbar is-fixed-top navshadow" role="navigation" aria-label="main navigation" style={{ top: `${props.hidden ? '-60px' : '0'}` }}>
       <div className="navbar-brand">
         <Link className="navbar-item" to="/">
-          <strong className="is-size-5 footer-logo mx-5">DeForm™</strong>
+          <strong className="is-size-5 footer-logo mx-5"><span className="has-text-silver">De</span><span className="has-text-dark">Form</span></strong>
         </Link>
 
-        <a role="button" className={`navbar-burger burger ${isActive ? 'is-active' : ''}`} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onClick={
+        <p role="button" className={`navbar-burger burger ${isActive ? 'is-active' : ''}`} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onClick={
           () => {
             setIsActive(!isActive)
           }
@@ -28,7 +28,7 @@ export default function Navbar(props: any) {
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
-        </a>
+        </p>
       </div>
 
       <div id="navbarBasicExample" className={`navbar-menu ${isActive ? 'is-active' : ''}`}>
@@ -39,16 +39,16 @@ export default function Navbar(props: any) {
         </div>
 
         <div className="navbar-end">
-          <div className="navbar-item has-dropdown is-hoverable">
-            <a className="navbar-link has-text-weight-bold">
+          <div className="navbar-item has-dropdown  is-hoverable">
+            <p className="navbar-link has-text-weight-bold">
               Ujjawal Shrivastava
-        </a>
+        </p>
 
             <div className="navbar-dropdown is-right is-boxed">
-              <a href="http://deform.ujjawal.co/about" target="_blank" className="navbar-item">
+              <a href="http://deform.ujjawal.co/about" target="_blank" rel="noopener noreferrer" className="navbar-item">
                 About
           </a>
-              <a href="https://linkedin.com/in/ujjawalshrivastava" target="_blank" className="navbar-item">
+              <a href="https://linkedin.com/in/ujjawalshrivastava" target="_blank" rel="noopener noreferrer" className="navbar-item">
                 Developer
           </a>
               <hr className="navbar-divider" />
@@ -85,3 +85,5 @@ export default function Navbar(props: any) {
 
   )
 }
+
+export default withRouter(Navbar)

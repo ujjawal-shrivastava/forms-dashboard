@@ -16,14 +16,14 @@ body::-webkit-scrollbar-thumb {
 }
 
 .toolbar{
-  height: 60vh;
+  height: fit-content;
   position: sticky;  
   z-index: 1;
-  @media (max-width: 1200px) {
+  transition: top ease 0.5s;
+  @media (max-width: 768px) {
     height: auto; 
     //background-color: #dfe4ea;
     margin-top: 0.5rem;
-    transition: top ease 0.6s;
   }
 }
 
@@ -34,7 +34,7 @@ body::-webkit-scrollbar-thumb {
   justify-content: center;
   padding: 0.5rem;
   width: 100%;
-  @media (max-width: 1200px) {
+  @media (max-width: 768px) {
     flex-direction: row;
     justify-content: space-around;
   }
@@ -48,7 +48,8 @@ body::-webkit-scrollbar-thumb {
     padding: 0.5rem 0rem 0.5rem 0rem;
     margin: 0.2rem 0rem 0.2rem 0rem;
     width: 100%;
-    @media (max-width: 1200px) {
+    transition: ease-in-out 0.4s;
+    @media (max-width: 768px) {
       width: auto;
       margin: 0rem;
       
@@ -57,7 +58,7 @@ body::-webkit-scrollbar-thumb {
 
   .my-button:hover{
     background-color: #808e9b;
-    @media (max-width: 1200px) {
+    @media (max-width: 768px) {
       background-color:#3d3d3d;
     }
   }
@@ -70,20 +71,72 @@ body::-webkit-scrollbar-thumb {
     margin-right: 0.6rem;
     color: transparentize($color: #ffffff, $amount: 0.1);
     font-weight: 400;
-    @media (max-width: 1200px) {
+    @media (max-width: 768px) {
       display: none;
       visibility: hidden;
     }
   }
 }
 
+.footer-logo{
+  color:transparentize($color: #000000, $amount: 0.6);
+  font-family: 'Bebas Neue', cursive;
+  letter-spacing: 0.1rem;
+}
 
+.nav-trans {
+  transition: ease-in-out 0.2s;
+}
+
+.drop-section{
+  //height: fit-content;
+  //style={{ borderRadius: "10px", marginTop: "1rem", overflow: "hidden", backgroundColor: "#bdc3c7" }}
+  background-color:#bdc3c7	; //	#f5f5f5 #bdc3c7
+  border-radius: 10px;
+  margin-top: 1rem;
+  overflow: hidden;
+  box-shadow: inset 2px 18px 30px 18px transparentize($color: #000000, $amount: 0.8);
+}
+
+.section-title{
+  background-color:	#363636;
+  padding: 0.8rem;
+  box-shadow:         0px 0px 21px 0px transparentize($color: #000000, $amount: 0.4);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.component-control{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0;
+  align-self: stretch;
+  
+
+  .delete-control{
+    display: flex;
+    padding: 1rem;
+    height: 100%;
+    background-color: #ff3838;
+    align-self: stretch;
+  }
+  .move-control{
+    display: flex;
+    padding: 1rem;
+    height: 100%;
+    background-color: #2d3436;
+    align-self: stretch;
+  }
+}
 
 $body-background-color :#dfe4ea;
 $footer-background-color:#ffffff00;
 $footer-padding: 0rem 0rem 2rem 0rem;
 $panel-block-hover-background-color:#c7ecee;
-$box-shadow:0 0.5em 1em -0.125em rgba(#000000, 0.16), 0 0px 0 1px rgba(#000000, 0.02);
+$box-shadow:0 0.7em 1em -0.125em rgba(#000000, 0.16), 0 0px 0 1px rgba(#000000, 0.02);
 
 
 @import '../node_modules/bulma/bulma.sass'
