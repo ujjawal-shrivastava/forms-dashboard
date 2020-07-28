@@ -14,7 +14,6 @@ export default function BaseArea(props: any) {
 
         setState((old:any)=>{
             old ={...old}
-            console.log(old["sections"][source.droppableId]["components"][source.index])
             old["sections"][source.droppableId]["components"].splice(source.index, 1)
             old["sections"][destination.droppableId]["components"].splice(destination.index,0,item)
             return old

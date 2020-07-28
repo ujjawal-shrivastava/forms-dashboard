@@ -31,11 +31,11 @@ export default function Section(props: any) {
                     <div className="section" ref={provided.innerRef}{...provided.droppableProps} style={{padding:"0.5rem 1.6rem"}}>
                         {props.section["components"].map((value: any, index: number) => {
                             return (
-                                <Draggable draggableId={value.id} index={index} >
+                                <Draggable draggableId={value.id} index={index} key={value.id}>
                                     {(provided: any) => {
                                         return (
                                             <div ref={provided.innerRef} {...provided.draggableProps}>
-                                                <BaseComponent key={index} component={value} dragHandle={provided.dragHandleProps}/>
+                                                <BaseComponent  component={value} dragHandle={provided.dragHandleProps}/>
                                             </div>
                                         )
                                     }}
