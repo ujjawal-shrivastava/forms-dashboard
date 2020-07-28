@@ -107,6 +107,26 @@ body::-webkit-scrollbar-thumb {
   justify-content: space-between;
 }
 
+
+.component-data{
+  //style={{display:"flex", flexDirection:"row", alignItems:'center',justifyContent:"space-between", width:"100%"}}
+  display: flex;
+  flex-direction: row;
+  //align-items: center;
+  //justify-content: space-between;
+  width: 100%;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: space-between;
+    justify-content: start;
+  }
+
+  @media (min-width: 768px) {
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
 .component-control{
   display: flex;
   flex-direction: row;
@@ -114,6 +134,10 @@ body::-webkit-scrollbar-thumb {
   align-items: center;
   padding: 0;
   align-self: stretch;
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+    align-items: space-evenly;
+  }
   
 
   .delete-control{
