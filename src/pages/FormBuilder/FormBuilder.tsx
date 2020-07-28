@@ -69,9 +69,7 @@ export default function FormBuilder(props: any) {
 
         setState((old:any)=>{
             old={...old}
-            var last = 0
-            console.log("Adding Item at ", last)
-            old["sections"][last]["components"].push(item)
+            old["sections"][old["sections"].length-1]["components"].push(item)
             return old
         })
     }
