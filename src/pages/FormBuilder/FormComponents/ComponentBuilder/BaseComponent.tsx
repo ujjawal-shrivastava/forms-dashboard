@@ -11,17 +11,17 @@ export default function BaseComponent(props: any) {
             </div>
             <div className="component-control">
                 <div className="edit-control">
-                    <span className="icon has-text-white" style={{ alignSelf: "center"  }}>
+                    <span className="icon has-text-white" style={{ alignSelf: "center"}}>
                         <i className="fa fa-pencil"></i>
                     </span>
                 </div>
                 <div className="delete-control">
-                    <span className="icon has-text-white" style={{ alignSelf: "center"   }}>
+                    <span className="icon has-text-white" style={{ alignSelf: "center" }} onClick={()=>{props.delItem(props.sectionIndex, props.fieldIndex)}}>
                         <i className="fa fa-trash-o"></i>
                     </span>
                 </div>
                 <div {...props.dragHandle} className="move-control">
-                    <span className="icon has-text-white" style={{ alignSelf: "center" }}>
+                    <span className="icon has-text-white" style={{ alignSelf: "center"}}>
                         <i className="fa fa-arrows"></i>
                     </span>
                 </div>

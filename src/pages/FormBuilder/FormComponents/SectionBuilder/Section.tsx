@@ -3,20 +3,6 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import BaseComponent from '../ComponentBuilder/BaseComponent'
 
 export default function Section(props: any) {
-    const state = props.state
-    const setState = props.setState
-    const handleDragEnd = ({ destination, source }: any) => {
-        if (!destination) { return }
-        if ((destination.index === source.index) && (destination.droppableId === source.droppableId)) { return }
-
-        const itemCopy = { ...state["sections"][props.section]["components"][source.index] }
-        setState((prev: any) => {
-            prev = { ...prev }
-            prev["sections"][props.section]["components"].splice(source.index, 1)
-            prev["sections"][props.section]["components"].splice(destination.index, 0, itemCopy)
-            return prev
-        })
-    }
     return (
         <div className="drop-section" >
             <div className="section-title has-text-white has-text-weight-bold">
@@ -25,7 +11,7 @@ export default function Section(props: any) {
                     <span className="icon mx-2" style={{cursor:"pointer"}}>
                         <i className="fa fa-pencil"></i>
                     </span>
-                    <span className="icon mx-2" style={{cursor:"pointer"}}>
+                    <span className="icon mx-2" style={{cursor:"pointer"}} onClick={()=>{props.delSection(props.index)}}>
                         <i className="fa fa-trash-o"></i>
                     </span>
                 </div>
@@ -40,7 +26,7 @@ export default function Section(props: any) {
                                     {(provided: any) => {
                                         return (
                                             <div ref={provided.innerRef} {...provided.draggableProps}>
-                                                <BaseComponent  component={value} dragHandle={provided.dragHandleProps}/>
+                                                <BaseComponent sectionIndex={props.index} fieldIndex={index} component={value} dragHandle={provided.dragHandleProps} {...props}/>
                                             </div>
                                         )
                                     }}

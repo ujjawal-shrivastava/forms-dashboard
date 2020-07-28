@@ -23,7 +23,7 @@ export default function BaseArea(props: any) {
         <DragDropContext onDragEnd={handleDrag}>
             {props.state["sections"].map((value: any, index: number) => {
                 return (
-                    <Section index={index} section={value} key={index} state={props.state} />
+                    <Section index={index} section={value} key={index} state={props.state} {...props} />
                 )
             })}
         </DragDropContext>

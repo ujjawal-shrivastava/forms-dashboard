@@ -69,7 +69,9 @@ export default function FormBuilder(props: any) {
 
         setState((old:any)=>{
             old={...old}
-            old["sections"][old["sections"].length-1]["components"].push(item)
+            var last = 0
+            console.log("Adding Item at ", last)
+            old["sections"][last]["components"].push(item)
             return old
         })
     }
@@ -80,27 +82,48 @@ export default function FormBuilder(props: any) {
             title: "New Section",
             components: []
         }
-
         setState((old:any)=>{
             old={...old}
             old["sections"].push(section)
             return old
         })
+        return
     }
+
+    const delItem =(sectionIndex:number, fieldIndex:number)=>{
+        console.log("Deleted Item at ",sectionIndex, fieldIndex)
+        setState((old:any)=>{
+            old={...old}
+            old["sections"][sectionIndex]["components"].splice(fieldIndex,1)
+            return old
+        })
+        return
+    }
+
+    const delSection =(sectionIndex:number)=>{
+        console.log("Deleted Section at ",sectionIndex)
+        setState((old:any)=>{
+            old={...old}
+            old["sections"].splice(sectionIndex,1)
+            return old
+        })
+        return
+    }
+
 
     return (
         <section className="section pt-5">
             <p><strong className="has-text-weight-bold is-size-4 ml-5 ">Create New Form</strong></p>
             <div className="columns">
                 <FormSidebar navHidden={props.navHidden}>
-                    <SidebarItem icon="fa-plus" text="Field" onClick={addItem} />
-                    <SidebarItem icon="fa-file-o" text="Section" onClick={addSection} />
+                    <SidebarItem icon="fa-plus" text="Field" clickHandler={addItem} />
+                    <SidebarItem icon="fa-file-o" text="Section" clickHandler={addSection} />
                     <SidebarItem icon="fa-floppy-o" text="Save" />
                     <SidebarItem icon="fa-share" text="Export" />
                     <SidebarItem icon="fa-eye" text="Preview" />
                     <SidebarItem icon="fa-globe" text="Publish" />
                 </FormSidebar>
-                <FormView state={state} setState={setState}/>
+                <FormView state={state} setState={setState} delSection={delSection} delItem={delItem}/>
             </div>
         </section>
     )

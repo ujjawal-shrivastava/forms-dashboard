@@ -6,7 +6,7 @@ export default function FormView(props:any) {
     return (
         <div className="column">
             <HeadSection />
-            <BaseArea state={props.state} setState={props.setState} />
+            <BaseArea {...props} />
         </div>
     )
 }
