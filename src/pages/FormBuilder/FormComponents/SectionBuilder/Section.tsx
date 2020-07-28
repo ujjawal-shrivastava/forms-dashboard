@@ -21,9 +21,14 @@ export default function Section(props: any) {
         <div className="drop-section" >
             <div className="section-title has-text-white has-text-weight-bold">
                 <p>{props.section.title}</p>
-                <span className="icon">
-                    <i className="fa fa-trash-o"></i>
-                </span>
+                <div className="section-control-box">
+                    <span className="icon mx-2" style={{cursor:"pointer"}}>
+                        <i className="fa fa-pencil"></i>
+                    </span>
+                    <span className="icon mx-2" style={{cursor:"pointer"}}>
+                        <i className="fa fa-trash-o"></i>
+                    </span>
+                </div>
             </div>
         <Droppable droppableId={props.index.toString()}>
             {(provided) => {

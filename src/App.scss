@@ -57,6 +57,7 @@ body::-webkit-scrollbar-thumb {
   }
 
   .my-button:hover{
+    cursor: pointer;
     background-color: #808e9b;
     @media (max-width: 768px) {
       background-color:#3d3d3d;
@@ -138,14 +139,20 @@ body::-webkit-scrollbar-thumb {
     flex-direction: column-reverse;
     align-items: space-evenly;
   }
-  
 
   .delete-control{
     display: flex;
     padding: 1rem;
     height: 100%;
-    background-color: #ff3838;
+    background-color:  #2d3436; //#2d3436
     align-self: stretch;
+    transition: ease 0.3s;
+
+  }
+  .delete-control:hover,.delete-control:active{
+    cursor: pointer;
+    background-color: #ff3838;
+
   }
   .move-control{
     display: flex;
@@ -153,6 +160,23 @@ body::-webkit-scrollbar-thumb {
     height: 100%;
     background-color: #2d3436;
     align-self: stretch;
+  }
+
+  .move-control:active{
+    background-color: #4b7bec;
+  }
+
+  .edit-control{
+    display: flex;
+    padding: 1rem;
+    height: 100%;
+    background-color:  #2d3436;
+    align-self: stretch;
+    transition: ease 0.3s;
+  }
+  .edit-control:hover,.edit-control:active{
+    cursor: pointer;
+    background-color: #ffa801;
   }
 }
 

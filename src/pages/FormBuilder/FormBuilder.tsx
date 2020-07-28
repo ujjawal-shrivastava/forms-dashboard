@@ -2,22 +2,97 @@ import React, { useState } from 'react'
 import FormSidebar from './FormComponents/SideBar/FormSidebar'
 import FormView from './FormComponents/FormView'
 import SidebarItem from './FormComponents/SideBar/SidebarItem'
+import {v4} from 'uuid'
 
 export default function FormBuilder(props: any) {
     document.title = "Untitled* - DeForm";
+    const item1 = {
+        id: v4(),
+        type: "text",
+        title: "Name",
+        props: {}
+    }
+
+    const item2 = {
+        id: v4(),
+        type: "email",
+        title: "Email",
+        props: {}
+    }
+
+    const item3 = {
+        id: v4(),
+        type: "number",
+        title: "Roll. No.",
+        props: {}
+    }
+
+    const item4 = {
+        id: v4(),
+        type: "choice",
+        title: "Gender dhhfhdfd dfjhdfjd bdufhudf uhdfiosfs ijsdfodf jshdfuishdf hhdsfiuisdf hisdfiusdf buisdfuisdf ugsdfgsdf buisdfduisdf isdfguisdgf biusdgfiugsdf bisdfigusdf",
+        props: {}
+    }
+
+    const item5 = {
+        id: v4(),
+        type: "multiple",
+        title: "Hobbies",
+        props: {}
+    }
+
+
+    const [state, setState] = useState(
+        {
+            "sections": [
+                {
+                    id: v4(),
+                    title: "Personal Details",
+                    components: [item1, item2, item5]
+                },
+                {
+                    id: v4(),
+                    title: "College Details",
+                    components: [item3, item4]
+                }
+            ]
+        }
+    )
+
+    const addItem = ()=>{
+        const item = {
+            id: v4(),
+            type: "text",
+            title: "New Field",
+            props: {}
+        }
+
+        state["sections"][state["sections"].length-1]["components"].push(item)
+    }
+
+    const addSection = ()=>{
+        const section = {
+            id: v4(),
+            title: "New Section",
+            components: []
+        }
+
+        state["sections"].push(section)
+    }
+
     return (
         <section className="section pt-5">
             <p><strong className="has-text-weight-bold is-size-4 ml-5 ">Create New Form</strong></p>
             <div className="columns">
                 <FormSidebar navHidden={props.navHidden}>
-                    <SidebarItem icon="fa-plus" text="Field" />
-                    <SidebarItem icon="fa-file-o" text="Section" />
-                    <SidebarItem icon="fa-pencil" text="Edit" />
+                    <SidebarItem icon="fa-plus" text="Field" onClick={addItem} />
+                    <SidebarItem icon="fa-file-o" text="Section" onClick={addSection} />
                     <SidebarItem icon="fa-floppy-o" text="Save" />
+                    <SidebarItem icon="fa-share" text="Export" />
                     <SidebarItem icon="fa-eye" text="Preview" />
                     <SidebarItem icon="fa-globe" text="Publish" />
                 </FormSidebar>
-                <FormView />
+                <FormView state={state} setState={setState}/>
             </div>
         </section>
     )
