@@ -35,7 +35,7 @@ export default function Section(props: any) {
                                     {(provided: any) => {
                                         return (
                                             <div ref={provided.innerRef} {...provided.draggableProps}>
-                                                <BaseComponent component={value} dragHandle={provided.dragHandleProps}/>
+                                                <BaseComponent key={index} component={value} dragHandle={provided.dragHandleProps}/>
                                             </div>
                                         )
                                     }}
