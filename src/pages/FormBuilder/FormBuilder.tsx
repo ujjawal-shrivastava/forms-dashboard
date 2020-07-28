@@ -67,7 +67,11 @@ export default function FormBuilder(props: any) {
             props: {}
         }
 
-        state["sections"][state["sections"].length-1]["components"].push(item)
+        setState((old:any)=>{
+            old={...old}
+            old["sections"][old["sections"].length-1]["components"].push(item)
+            return old
+        })
     }
 
     const addSection = ()=>{
@@ -77,7 +81,11 @@ export default function FormBuilder(props: any) {
             components: []
         }
 
-        state["sections"].push(section)
+        setState((old:any)=>{
+            old={...old}
+            old["sections"].push(section)
+            return old
+        })
     }
 
     return (
