@@ -1,20 +1,23 @@
 import React, { useContext, useState } from 'react'
 import { FormContext } from '../../FormContext'
+import { v4 } from 'uuid'
 
-export default function BaseEditComponent(props: any) {
+export default function SectionAdd(props: any) {
     const [state, setState] = useContext(FormContext)
-    const [title, setTitle] = useState(state["sections"][props.section].title)
-    const [position, setPosition]= useState(props.section)
+    const [title, setTitle] = useState("")
+    const [position, setPosition]= useState("-1")
     const [isActive, setIsActive] = props.isActive
 
     const handleSave = () => {
-        const newState = { ...state }
-        newState["sections"][props.section].title = title
-        if(position!==props.section) {
-            const sectionCopy = {...newState["sections"][props.section]}
-            newState["sections"].splice(props.section, 1)
-            newState["sections"].splice(position, 0, sectionCopy)
+        const item = {
+            id: v4(),
+            title: title,
+            components:[]
         }
+        var newState = { ...state }
+
+        if(+position<0) newState["sections"].push(item) 
+        else  newState["sections"].splice(position,0,item)
         setState(newState)
         handleClose()
     }
@@ -32,7 +35,7 @@ export default function BaseEditComponent(props: any) {
             <div className="modal-background"></div>
             <div className="modal-card" style={{ maxWidth: "90%" }}>
                 <header className="modal-card-head">
-                    <p className="modal-card-title is-size-5 has-text-weight-semibold">{`Edit Section #${props.section + 1}`}</p>
+                    <p className="modal-card-title is-size-5 has-text-weight-semibold">{`Add Section`}</p>
                     <button onClick={handleClose} className="delete" aria-label="close"></button>
                 </header>
                 <section className="modal-card-body">
@@ -46,9 +49,10 @@ export default function BaseEditComponent(props: any) {
                     <label className="label is-normal">Position</label>
                         <div className="control">
                             <div className="select">
-                                <select defaultValue={position} onChange={(e)=>{setPosition(e.target.value)}}>
+                                <select defaultValue={"-1"} onChange={(e)=>{setPosition(e.target.value)}}>
+                                <option value={"-1"} key={-1}>End</option>
                                     {state["sections"].map((_:any,index:number)=>{
-                                        return(<option value={index} key={index}>Position {`${index+1}`}</option>)
+                                        return(<option value={index.toString()} key={index}>Position {`${index+1}`}</option>)
                                     })}
                                 </select>
                             </div>
@@ -56,7 +60,7 @@ export default function BaseEditComponent(props: any) {
                     </div>
                 </section>
                 <footer className="modal-card-foot">
-                    <button className="button is-success" onClick={handleSave}>Save changes</button>
+                    <button className="button is-success" onClick={handleSave}>Add Section</button>
                     <button className="button" onClick={handleClose}>Cancel</button>
                 </footer>
             </div>

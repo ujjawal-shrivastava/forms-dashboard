@@ -42,7 +42,7 @@ export default function Section(props: any) {
 
     return (
         <div className="drop-section" >
-            {modalActive ? <BaseEditComponent isActive={[modalActive, setModalActive]} /> : <div></div>}
+            {modalActive ? <BaseEditComponent isActive={[modalActive, setModalActive]} section={props.index}/> : <div></div>}
             <div className="section-title has-text-white has-text-weight-bold">
                 <span className="tag is-light">{`#${props.index + 1}`}</span>
                 <p className="mx-3" style={{ overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis" }}>{props.section.title}</p>
@@ -60,11 +60,12 @@ export default function Section(props: any) {
 
             </div>
 
-            {(props.section["components"].length === 0) ? <div onClick={addItem} className="field-placeholder">CLICK TO ADD NEW FIELD</div> : <div></div>}
+            
             <Droppable droppableId={props.index.toString()}>
                 {(provided) => {
                     return (
                         <div className="section" ref={provided.innerRef}{...provided.droppableProps} style={{ padding: "0.5rem 1.6rem" }}>
+                            {(props.section["components"].length === 0) ? <div onClick={addItem} className="field-placeholder">CLICK TO ADD NEW FIELD</div> : <div></div>}
                             {
                                 props.section["components"].map((value: any, index: number) => {
                                     return (

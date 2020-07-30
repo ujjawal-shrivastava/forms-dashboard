@@ -1,11 +1,13 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import SidebarItem from './SidebarItem'
 import { FormContext } from '../../FormContext'
 import { v4 } from 'uuid'
+import SectionAdd from '../AddComponent/SectionAdd'
 
 
 export default function FormSidebar(props: any) {
     const [state,setState] = useContext(FormContext)
+    const [sectionActive, setSectionActive] = useState(false)
 
     const addItem = ()=>{
         const item = {
@@ -20,14 +22,18 @@ export default function FormSidebar(props: any) {
     }
 
     const addSection = ()=>{
-        const section = {
+        /*const section = {
             id: v4(), 
             title: "Untitled Section*",
             components:[]
         }
         var newState = {...state}
         newState["sections"].push(section)
-        setState(newState)
+        setState(newState)*/
+
+        document.body.style.top = `-${window.scrollY}px`;
+        document.body.style.position = 'fixed';
+        setSectionActive(true)
     }
 
     return (
@@ -40,6 +46,8 @@ export default function FormSidebar(props: any) {
                 display: "flex",
                 justifyContent: "center",
             }}>
+                
+                {sectionActive ? <SectionAdd isActive={[sectionActive, setSectionActive]} /> : <div></div>}
                 <div className="toolbar-list">
                     <SidebarItem icon="fa-plus" text="Field" clickHandler={addItem} />
                     <SidebarItem icon="fa-file-o" text="Section" clickHandler={addSection} />

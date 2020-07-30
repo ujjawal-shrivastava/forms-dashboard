@@ -186,7 +186,7 @@ body::-webkit-scrollbar-thumb {
 
 .field-placeholder{
   display: flex;
-  margin: 2rem;
+  margin: 2rem 1rem;
   padding: 2rem;
   align-items: center;
   justify-content: center;
@@ -197,6 +197,7 @@ body::-webkit-scrollbar-thumb {
   color: transparentize($color: #ffffff, $amount: 0.7) ;
   font-weight: 800;
   cursor: pointer;
+  text-align: center;
 }
 
 $body-background-color :#dfe4ea;
