@@ -64,7 +64,7 @@ export default function Colors() {
     return (
         <p className="buttons">
             {colors.map((value:any,index)=>{
-                return(<Color key={index} text={value.text.toUpperCase()} code={value.code} selected={currentColor} change={setCurrentColor} />)
+                return(<Color key={index} text={value.text.toUpperCase()} code={value.code} />)
             })}
         </p>
     )

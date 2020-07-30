@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Section from './Section'
 import { DragDropContext} from 'react-beautiful-dnd'
+import { FormContext } from '../../FormContext'
+
 export default function BaseArea(props: any) {
-    const state= props.state
-    const setState = props.setState
+    const [state, setState] =useContext(FormContext)
     const handleDrag= (result:any)=>{
         const destination = result.destination
         const source = result.source
@@ -21,9 +22,9 @@ export default function BaseArea(props: any) {
     }
     return (
         <DragDropContext onDragEnd={handleDrag}>
-            {props.state["sections"].map((value: any, index: number) => {
+            {state["sections"].map((value: any, index: number) => {
                 return (
-                    <Section index={index} section={value} key={index} state={props.state} {...props} />
+                    <Section index={index} section={value} key={index} />
                 )
             })}
         </DragDropContext>

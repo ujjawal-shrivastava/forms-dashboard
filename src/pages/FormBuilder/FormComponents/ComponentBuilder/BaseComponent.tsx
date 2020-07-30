@@ -1,6 +1,18 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import { FormContext } from '../../FormContext'
 
 export default function BaseComponent(props: any) {
+    const [state, setState] = useContext(FormContext)
+
+    const delItem =()=>{
+        setState((old:any)=>{
+            old={...old}
+            old["sections"][props.sectionIndex]["components"].splice(props.fieldIndex,1)
+            return old
+        })
+        return
+    }
+
     return (
         <div className="box" style={{ padding: "0rem", display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", overflow: "hidden", margin: "1rem 0rem" }} >
             <div className="component-data">
@@ -15,8 +27,8 @@ export default function BaseComponent(props: any) {
                         <i className="fa fa-pencil"></i>
                     </span>
                 </div>
-                <div className="delete-control">
-                    <span className="icon has-text-white" style={{ alignSelf: "center" }} onClick={()=>{props.delItem(props.sectionIndex, props.fieldIndex)}}>
+                <div className="delete-control" onClick={delItem}>
+                    <span className="icon has-text-white" style={{ alignSelf: "center" }} >
                         <i className="fa fa-trash-o"></i>
                     </span>
                 </div>
