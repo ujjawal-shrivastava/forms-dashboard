@@ -1,0 +1,39 @@
+
+.tile-index{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+  padding: 1rem;
+  width: 5.2rem;
+  background-color: #2d3436;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 0rem;
+    width: 2rem;
+    p{
+      transform: rotate(-90deg);
+      }
+  }
+
+}
+
+.tile-data{
+  //style={{display:"flex", flexDirection:"row", alignItems:'center',justifyContent:"space-between", width:"100%"}}
+  display: flex;
+  flex-direction: row;
+  //align-items: center;
+  //justify-content: space-between;
+  width: 100%;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: space-between;
+    justify-content: start;
+  }
+
+  @media (min-width: 768px) {
+    align-items: center;
+    justify-content: space-between;
+  }
+}

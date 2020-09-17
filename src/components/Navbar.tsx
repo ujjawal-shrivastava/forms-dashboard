@@ -1,17 +1,57 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import NavbarItem from './NavbarItem';
-import { Link, withRouter,Redirect} from 'react-router-dom';
+import { Link, withRouter,useLocation} from 'react-router-dom';
+import {UserContext} from '../UserContext'
+import { toast as superToast } from 'bulma-toast'
+import { useMutation } from 'react-apollo-hooks';
+import {gql} from 'apollo-boost'
+
+const LOGOUT= gql`
+  mutation logout {
+    logout
+  }
+`;
 
 function Navbar(props: any) {
   const [isActive, setIsActive] = useState(false);
-  const [currentPage, setCurrentPage] = useState(window.location.pathname)
+  const location = useLocation()
+  const [user, setUser] = useContext(UserContext)
+  
+  const [api_logout, {loading}] = useMutation(LOGOUT, { errorPolicy: 'all'});
 
   document.body.className = "has-navbar-fixed-top";
 
-  const changePage = (page: string) => {
+  const changePage = () => {
     setIsActive(false)
-    setCurrentPage(page)
   }
+
+  const logout = ()=>{
+    api_logout().then(({data, errors}) => {
+      if(!errors){
+        setUser({
+          email:"",
+          token:"",
+          name:"",
+          auth:false,
+          long:""
+      })
+      sessionStorage.clear()
+      localStorage.clear()
+      superToast({
+          message: `Good Bye! You are successfully logged out!`,
+          type: "is-black",
+          position: "top-center",
+          duration: 2000,
+          animate: { in: 'fadeIn', out: 'fadeOut' },
+          dismissible: true,
+          pauseOnHover: true
+        });
+      }
+      
+    });
+    
+  }
+
 
   return (
     <nav id="navbar" className="navbar is-fixed-top navshadow" role="navigation" aria-label="main navigation" style={{ top: `${props.hidden ? '-60px' : '0'}` }}>
@@ -33,15 +73,14 @@ function Navbar(props: any) {
 
       <div id="navbarBasicExample" className={`navbar-menu ${isActive ? 'is-active' : ''}`}>
         <div className="navbar-start">
-          <NavbarItem title="Dashboard" change={changePage} isActive={currentPage === "/"} route="/" />
-          <NavbarItem title="Forms" change={changePage} isActive={currentPage === "/forms"} route="/forms" />
-          <NavbarItem title="Responses" change={changePage} isActive={currentPage === "/responses"} route="/responses" />
+          <NavbarItem title="Dashboard" change={changePage} isActive={location.pathname === "/"} route="/" />
+          <NavbarItem title="Forms" change={changePage} isActive={location.pathname === "/forms"} route="/forms" />
         </div>
 
         <div className="navbar-end">
           <div className="navbar-item has-dropdown  is-hoverable">
             <p className="navbar-link has-text-weight-bold">
-              Ujjawal Shrivastava
+              {user.name||user.email}
         </p>
 
             <div className="navbar-dropdown is-right is-boxed">
@@ -53,16 +92,14 @@ function Navbar(props: any) {
           </a>
               <hr className="navbar-divider" />
               <Link to="/settings" onClick={() => {
-                setCurrentPage("Settings")
                 setIsActive(false)
               }} className="navbar-item">
                 Settings
           </Link>
             </div>
           </div>
-          <Link to="/add" className="navbar-item">
+          <Link to="/create" className="navbar-item" title="Create New Form">
             <button className="button is-dark is-focused is-rounded is-small" onClick={() => {
-              setCurrentPage("Create")
               setIsActive(false)
             }}>
               <span className="icon is-small">
@@ -71,14 +108,14 @@ function Navbar(props: any) {
               <span>Create Form</span>
             </button>
           </Link>
-          <div className="navbar-item">
-            <button className="button is-danger is-focused is-rounded is-small">
+          <Link to="/login" className="navbar-item">
+            <button className="button is-danger is-focused is-rounded is-small" onClick={logout} disabled={loading}>
               <span className="icon is-small">
                 <i className="fa fa-sign-out"></i>
               </span>
-              <span>Logout</span>
+          <span>{loading?"Logging out...":"Logout"}</span>
             </button>
-          </div>
+          </Link>
         </div>
       </div>
     </nav>

@@ -20,6 +20,7 @@ export default function BaseArea(props: any) {
             return old
         })
     }
+    if(state.isPublished) return null
     return (
         <DragDropContext onDragEnd={handleDrag}>
             {state["sections"].map((value: any, index: number) => {

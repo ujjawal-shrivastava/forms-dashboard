@@ -4,7 +4,8 @@ import React from 'react'
 interface SidebarItemsProps {
     icon:string,
     text:string,
-    clickHandler?:any
+    clickHandler?:any,
+    tag?:string
 }
 
 
@@ -17,8 +18,11 @@ export default function SidebarItem(props:SidebarItemsProps) {
                 </span>
             </button>
             <p className="button-text is-size-7">
-                {props.text}
+                {props.text} {props.tag?(<span className="has-text-success has-text-right is-size-7 has-text-weight-bold">{props.tag}</span>):""}
             </p>
+            
+            
+            
         </div>
     )
 }

@@ -34,7 +34,7 @@ export function FormProvider(props: any) {
             formid: "",
             title: "",
             description: "",
-            author: "Ujjawal Shrivastava",
+            author: "",
             bgtheme: "#2ecc71",
             isOpen: true,
             sections: [

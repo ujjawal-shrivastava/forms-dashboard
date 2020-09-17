@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { FormContext } from '../../FormContext'
 
-export default function BaseEditComponent(props: any) {
+export default function SectionEdit(props: any) {
     const [state, setState] = useContext(FormContext)
     const [title, setTitle] = useState(state["sections"][props.section].title)
     const [position, setPosition]= useState(props.section)

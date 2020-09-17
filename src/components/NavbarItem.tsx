@@ -15,7 +15,7 @@ export default function NavbarItem(props:Props) {
         <Link to={props.route} className={`navbar-item nav-trans ${props.isActive?"is-active is-tab":""}`}
             onClick={
                 ()=>{
-                    props.change(props.route)
+                    props.change()
                 }
             }
         >

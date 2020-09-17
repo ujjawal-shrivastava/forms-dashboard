@@ -4,11 +4,24 @@ import { v4 } from 'uuid'
 
 export default function SectionAdd(props: any) {
     const [state, setState] = useContext(FormContext)
-    const [title, setTitle] = useState("")
+    const [title, setTitle] = useState("Untitled Section")
+    const [error, setError] = useState({title:""})
     const [position, setPosition]= useState("-1")
     const [isActive, setIsActive] = props.isActive
 
+
+    const handleTitle = (value:string)=>{
+        setTitle(value)
+        setError((old: any) => {
+            let regexp: RegExp = /.{1,}/
+            old = { ...old }
+            old.title = regexp.test(value)?"":"Title cannot be empty."
+            return old
+        })
+    }
+
     const handleSave = () => {
+        if(error.title) return
         const item = {
             id: v4(),
             title: title,
@@ -18,6 +31,7 @@ export default function SectionAdd(props: any) {
 
         if(+position<0) newState["sections"].push(item) 
         else  newState["sections"].splice(position,0,item)
+        if(newState["sections"].length>1) newState["sections"][0].title="Untitled Section"
         setState(newState)
         handleClose()
     }
@@ -31,7 +45,10 @@ export default function SectionAdd(props: any) {
         window.scrollTo(0, parseInt(scrollY || '0') * -1);
     }
     return (
-        <div className={`modal ${isActive ? "is-active" : ""}`}>
+        <div className={`modal ${isActive ? "is-active" : ""}`} onKeyPress={(event)=>{
+            var code = event.keyCode || event.which
+            if(code===13) handleSave()
+        }}>
             <div className="modal-background"></div>
             <div className="modal-card" style={{ maxWidth: "90%" }}>
                 <header className="modal-card-head">
@@ -42,8 +59,9 @@ export default function SectionAdd(props: any) {
                     <div className="field">
                         <label className="label is-normal">Title</label>
                         <div className="control field-body">
-                            <input className="input" type="text" placeholder="Section Title" value={title} onChange={(e) => { setTitle(e.target.value) }} />
+                            <input className={`input ${error.title ? "is-danger" : ""}`} type="text" placeholder="Section Title" value={title} onChange={(e) => { handleTitle(e.target.value) }} />
                         </div>
+                        <p className="help is-danger">{error.title}</p>
                     </div>
                     <div className="field">
                     <label className="label is-normal">Position</label>
