@@ -10,7 +10,7 @@ import {useQuery } from 'react-apollo-hooks';
 import { gql } from 'apollo-boost'
 
 const DATA = gql`
-  query userData() {
+  query userData{
     userData {
       responses
       forms
