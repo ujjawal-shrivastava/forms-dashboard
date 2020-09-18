@@ -321,7 +321,7 @@ const FormSidebar = withRouter((props: any) => {
                 {unpublishActive ? <ConfirmDialog title="Unpublish Form" desc="Once the form is unpublished, people won't be submit responses. Are you sure you want to unpublish the form?" button1="Unpublish" isActive={[unpublishActive, setUnpublishActive]} func={unpublish} /> : null}
                 <div className="toolbar-list">
                     {state.isPublished ? <SidebarItem icon="fa-share-alt" text="Share" clickHandler={() => { setShareActive(true) }} /> : <SidebarItem icon="fa-plus" text="Field" clickHandler={addItem} />}
-                    {state.isPublished ? <SidebarItem icon="fa-list-ul" text="Responses" clickHandler={publish} /> : <SidebarItem icon="fa-file-o" text="Section" clickHandler={addSection} />}
+                    {state.isPublished ? <SidebarItem icon="fa-list-ul" text="Responses" clickHandler={()=>{props.history.push(`/responses/${state.formid}`)}} /> : <SidebarItem icon="fa-file-o" text="Section" clickHandler={addSection} />}
                     <SidebarItem icon={saved ? "fa-check" : "fa-floppy-o"} text={saved ? "Saved" : (saveLoading ? "Saving" : "Save")} clickHandler={saveForm} />
                     <SidebarItem icon="fa-share" text="Export" tag="TODO" />
                     <SidebarItem icon="fa-eye" text="Preview" clickHandler={showPreview} />
