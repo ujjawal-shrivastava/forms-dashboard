@@ -49,7 +49,7 @@ const Responses = withRouter((props: any) => {
         <section className="section" style={{ marginTop: "-1rem", padding: "3rem 2rem" }}>
             <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
                 <p className="has-text-dark is-size-4 has-text-weight-bold">Responses ({props.match.params.id})({data.responses.total})</p>
-                <div><CSVLink
+                {data.responses.total?<div><CSVLink
                     data={getData()}
                     filename={`Responses-${props.match.params.id} (${new Date().toLocaleString()}).csv`}
                     className="button is-link is-rounded is-small"
@@ -59,7 +59,7 @@ const Responses = withRouter((props: any) => {
                         <i className="fa fa-file-excel-o"></i>
                     </span>
                     <span>Export to CSV</span>
-                </CSVLink></div>
+                </CSVLink></div>:""}
             </div>
             <div>
                 <div className="columns is-mobile is-centered" style={{ marginTop: "0.6rem" }}>
