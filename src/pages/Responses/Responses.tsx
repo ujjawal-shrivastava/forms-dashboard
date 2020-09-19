@@ -1,11 +1,10 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Redirect, withRouter } from 'react-router-dom';
 import { UserContext } from '../../UserContext'
 import { useQuery } from 'react-apollo-hooks';
 import { gql } from 'apollo-boost'
 import Loading from '../../components/Loading/Loading';
 import { CSVLink } from "react-csv";
-
 const RESPONSES = gql`
   query responses($formid:String!) {
     responses(formid:$formid) {
@@ -20,10 +19,11 @@ const RESPONSES = gql`
 
   }
 `;
-
+const emptyData:any = []
 const Responses = withRouter((props: any) => {
     props = { ...props }
     const [user, setUser] = useContext(UserContext)
+    const [tableData, setTableData] = useState(emptyData)
     const { data, loading, error } = useQuery(RESPONSES, { errorPolicy: 'all', fetchPolicy: 'network-only', variables: { formid: props.match.params.id }, pollInterval: 5000 });
     document.title = "Responses - DeForm";
     if (!user.auth) return (<Redirect to="/login" />)
@@ -33,15 +33,21 @@ const Responses = withRouter((props: any) => {
     if (error) {
         return (<h1>Error</h1>)
     }
-    var colHeads = new Set()
-    data.responses.responses.forEach((i: any) => {
-        Object.keys(JSON.parse(i.data)).forEach(k => colHeads.add(k))
-    });
-    const getData = ()=>{
+    useEffect(()=>{
         var resData: any= []
         if(!data.responses.responses.length) return
         data.responses.responses.forEach((i: any) => {
             resData.push(JSON.parse(i.data)) 
+        });
+        setTableData(resData)
+    },[data])
+    const getData = ()=>{
+        var resData: any= []
+        if(!data.responses.responses.length) return
+        data.responses.responses.forEach((i: any) => {
+            var myrow = JSON.parse(i.data)
+            myrow["added"] = i.added
+            resData.push(myrow) 
         });
         return resData
     }
