@@ -29,7 +29,7 @@ export default function FormTile(props: { form: Form, preview:any, deleteActive:
             <div className="tile-data">
                 <p title={props.form.title} className="px-4 py-4 has-text-dark has-text-weight-semibold" style={{ wordBreak: "normal" }}>{(props.form.title.length > length) ? (props.form.title.substring(0, length) + "...") : props.form.title}</p>
                 <div style={{ padding: "0.8rem" }}>
-                    <span className="tag is-danger has-text-weight-bold is-light is-rounded mr-1 " title="Total Responses on this form" onClick={()=>{window.location.pathname = `/responses/${props.form.formid}`}}>{props.form.responses} Responses</span>
+                    <span className="tag is-danger has-text-weight-bold is-light is-rounded mr-1 " style={{cursor:"pointer"}} title="Total Responses on this form" onClick={()=>{window.location.pathname = `/responses/${props.form.formid}`}}>{props.form.responses} Responses</span>
     <span className="tag is-warning has-text-weight-bold is-light is-rounded mx-1 " title="Total Visits on this form">{props.form.views} Views</span>
                     <span className={`tag is-link ${props.form.open ?"":"is-light"} has-text-weight-bold is-rounded mx-1 my-3`} title={`Form is ${props.form.open ? "Open" : "Closed"} for responses`}>{props.form.open ? "Open" : "Closed"}</span>
                     <span className={`tag is-success ${props.form.published ?"":"is-light"} has-text-weight-bold is-rounded ml-1 my-3`} title={`Form is ${props.form.published ? "Published and Shareable" : "Saved but not published"}`}>{props.form.published ? "Published" : "Draft"}</span>
