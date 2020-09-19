@@ -20,7 +20,7 @@ export default function YourForms(props: any) {
                             <span className="panel-icon">
                                 <i className="fa fa-book" aria-hidden="true"></i>
                             </span>
-                    <small><strong>{value.formid}</strong>- {value.title.substring(0, 18)}</small>
+                    <small><strong>{value.formid}</strong>- {value.title.substring(0, 28)}</small>
                         </a>
                     )
                 })}
@@ -28,7 +28,6 @@ export default function YourForms(props: any) {
                     return (
                         <a key={index} className="panel-block">
                             <span className="panel-icon">
-                                <i className="fa fa-book" aria-hidden="true"></i>
                             </span>
                             <span>
 
