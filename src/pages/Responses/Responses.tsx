@@ -19,11 +19,9 @@ const RESPONSES = gql`
 
   }
 `;
-const emptyData:any = []
 const Responses = withRouter((props: any) => {
     props = { ...props }
     const [user, setUser] = useContext(UserContext)
-    const [tableData, setTableData] = useState(emptyData)
     const { data, loading, error } = useQuery(RESPONSES, { errorPolicy: 'all', fetchPolicy: 'network-only', variables: { formid: props.match.params.id }, pollInterval: 5000 });
     document.title = "Responses - DeForm";
     if (!user.auth) return (<Redirect to="/login" />)
@@ -33,14 +31,7 @@ const Responses = withRouter((props: any) => {
     if (error) {
         return (<h1>Error</h1>)
     }
-    useEffect(()=>{
-        var resData: any= []
-        if(!data.responses.responses.length) return
-        data.responses.responses.forEach((i: any) => {
-            resData.push(JSON.parse(i.data)) 
-        });
-        setTableData(resData)
-    },[data])
+    
     const getData = ()=>{
         var resData: any= []
         if(!data.responses.responses.length) return
