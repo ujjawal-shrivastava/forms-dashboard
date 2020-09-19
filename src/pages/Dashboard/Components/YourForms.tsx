@@ -2,6 +2,12 @@ import React from 'react'
 
 export default function YourForms(props: any) {
     const data = props.data
+    const emptyRows = []
+    if(data.length<5){
+        for(var _i = data.length; _i < 5; _i++){
+            emptyRows.push("")
+        }
+    }
     return (
         <div className="column is-one-third">
             <nav className="panel is-success" style={{ backgroundColor: '#ffffff' }}>
@@ -15,6 +21,18 @@ export default function YourForms(props: any) {
                                 <i className="fa fa-book" aria-hidden="true"></i>
                             </span>
                     <small><strong>{value.formid}</strong>- {value.title.substring(0, 18)}</small>
+                        </a>
+                    )
+                })}
+                {emptyRows.map((value:string,index: number) => {
+                    return (
+                        <a key={index} className="panel-block">
+                            <span className="panel-icon">
+                                <i className="fa fa-book" aria-hidden="true"></i>
+                            </span>
+                            <span>
+
+                            </span>
                         </a>
                     )
                 })}
