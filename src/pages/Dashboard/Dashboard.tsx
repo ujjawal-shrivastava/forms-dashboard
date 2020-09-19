@@ -10,22 +10,31 @@ import { useQuery } from 'react-apollo-hooks';
 import { gql } from 'apollo-boost'
 
 const DATA = gql`
-  query userData{
+  query userData ($input:FormsInput!){
     userData {
       responses
       forms
       views
     }
-
+  
+    forms(input:$input){
+        total
+        currentPage
+        forms {
+            formid
+            title
+        }
+    }
   }
 `;
 
 export default function Dashboard() {
     const [user, setUser] = useContext(UserContext)
-    const { data, loading, error } = useQuery(DATA, { errorPolicy: 'all', fetchPolicy: 'cache-and-network', pollInterval: 21000 });
+    const { data, loading, error } = useQuery(DATA, { errorPolicy: 'all', fetchPolicy: 'cache-and-network', pollInterval: 21000,variables: { input: { page: 1, open: "ALL", published: "ALL"} } });
     document.title = "Dashboard - DeForm";
     if (!user.auth) return (<Redirect to="/login" />)
     if (error) return (<h1>{error.message}</h1>)
+    console.log(data)
     return (
         <section className="section">
             <div className="columns mb-5">
