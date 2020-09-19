@@ -34,7 +34,6 @@ export default function Dashboard() {
     document.title = "Dashboard - DeForm";
     if (!user.auth) return (<Redirect to="/login" />)
     if (error) return (<h1>{error.message}</h1>)
-    console.log(data)
     return (
         <section className="section">
             <div className="columns mb-5">
@@ -44,7 +43,7 @@ export default function Dashboard() {
             </div>
             <p className="is-size-4 has-text-weight-bold mb-3 ml-3" style={{ color: '#3d3d3d' }}>Recent</p>
             <div className="columns">
-                <YourForms />
+                <YourForms data = {data.forms.forms}/>
                 <Actions />
             </div>
         </section>
