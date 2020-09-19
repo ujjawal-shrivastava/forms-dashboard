@@ -30,20 +30,20 @@ const DATA = gql`
 
 export default function Dashboard() {
     const [user, setUser] = useContext(UserContext)
-    const { data, error } = useQuery(DATA, { errorPolicy: 'all', fetchPolicy: 'cache-and-network', pollInterval: 21000,variables: { input: { page: 1, open: "ALL", published: "ALL"} } });
+    const { data,loading, error } = useQuery(DATA, { errorPolicy: 'all', fetchPolicy: 'cache-and-network', pollInterval: 60000,variables: { input: { page: 1, open: "ALL", published: "ALL"} } });
     document.title = "Dashboard - DeForm";
     if (!user.auth) return (<Redirect to="/login" />)
     if (error) return (<h1>{error.message}</h1>)
     return (
         <section className="section">
             <div className="columns mb-5">
-                <Card title="Forms" value={data ? "-" : data.userData.forms} color="#eb3b5a" img={forms} />
-                <Card title="Responses" value={data ? "-" : data.userData.responses} color="#ff9f43" img={forms} />
-                <Card title="Visits" value={data ? "-" : data.userData.views} color="#34495e" img={forms} />
+                <Card title="Forms" value={loading ? "-" : data.userData.forms} color="#eb3b5a" img={forms} />
+                <Card title="Responses" value={loading ? "-" : data.userData.responses} color="#ff9f43" img={forms} />
+                <Card title="Visits" value={loading ? "-" : data.userData.views} color="#34495e" img={forms} />
             </div>
             <p className="is-size-4 has-text-weight-bold mb-3 ml-3" style={{ color: '#3d3d3d' }}>Recent</p>
             <div className="columns">
-                <YourForms data = {data?[]:data.forms.forms.slice(0, 5)}/>
+                <YourForms data = {loading?[]:data.forms.forms.slice(0, 5)}/>
                 <Actions />
             </div>
         </section>
