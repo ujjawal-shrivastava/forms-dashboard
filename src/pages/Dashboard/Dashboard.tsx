@@ -43,7 +43,7 @@ export default function Dashboard() {
             </div>
             <p className="is-size-4 has-text-weight-bold mb-3 ml-3" style={{ color: '#3d3d3d' }}>Recent</p>
             <div className="columns">
-                <YourForms data = {data.forms.forms}/>
+                <YourForms data = {loading?[]:data.forms.forms.slice(0, 5)}/>
                 <Actions />
             </div>
         </section>
