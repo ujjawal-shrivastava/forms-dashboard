@@ -87,7 +87,7 @@ function Navbar(props: any) {
               <a href="http://deform.ujjawal.co/about" target="_blank" rel="noopener noreferrer" className="navbar-item">
                 About
           </a>
-              <a href="https://linkedin.com/in/ujjawalshrivastava" target="_blank" rel="noopener noreferrer" className="navbar-item">
+              <a href="mailto: deform.website@gmail.com" target="_blank" rel="noopener noreferrer" className="navbar-item">
                 Developer
           </a>
               <hr className="navbar-divider" />
